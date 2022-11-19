@@ -3,12 +3,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
   absences: [],
   loading: false,
-  error: "",
+  error: false,
 };
 export const getAbsences = createAsyncThunk("getAbsences", async () => {
   try {
     const response = await fetch("http://localhost:3000/absences");
-    console.log("Worked");
     return response.json();
   } catch (error) {
     console.error(error);
@@ -32,13 +31,11 @@ const absencesSlice = createSlice({
       state.absences = action.payload;
     });
     builder.addCase(getAbsences.rejected, (state, action) => {
-      state.error = action.payload as string;
+      state.error = true;
     });
   },
 });
 
 export const { fetch_success } = absencesSlice.actions;
-export const fetchAbsences = (state: { absencesList: { absences: any } }) =>
-  state.absencesList?.absences;
 
 export default absencesSlice.reducer;
