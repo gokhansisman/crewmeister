@@ -79,7 +79,7 @@ export const Badge = styled.span<{ color: string }>`
   color: ${(props) => props.color};
 `;
 
-const addToCalendar = async () => {
+const addToCalendar = async (absence: Absence, member: Member) => {
   const settings: RequestInit = {
     method: "POST",
     headers: {
@@ -87,17 +87,15 @@ const addToCalendar = async () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      startTime: "2022-11-19",
-      endTime: "2022-11-19",
-      name: "gokhan",
+      startTime: absence.startDate,
+      endTime: absence.endDate,
+      name: member.name,
+      summary: absence.type,
     }),
   };
 
   try {
-    const fetchResponse = await fetch(
-      `/addToCalendar`,
-      settings
-    );
+    const fetchResponse = await fetch(`/addToCalendar`, settings);
     const data = await fetchResponse.json();
     return data;
   } catch (e) {
@@ -105,9 +103,9 @@ const addToCalendar = async () => {
   }
 };
 /**
-  * AbsenceCard component renders the absence information of a member
-  * @param {AbsenceCardProps} props
-  * @returns {JSX.Element}
+ * AbsenceCard component renders the absence information of a member
+ * @param {AbsenceCardProps} props
+ * @returns {JSX.Element}
  */
 function AbsenceCard({ absence, member }: AbsenceCardProps) {
   return (
@@ -167,7 +165,7 @@ function AbsenceCard({ absence, member }: AbsenceCardProps) {
         </Columns>
       )}
 
-      <AddToCalendar onClick={addToCalendar}>
+      <AddToCalendar onClick={() => addToCalendar(absence,member)}>
         <FcCalendar size={24} />
       </AddToCalendar>
     </Container>

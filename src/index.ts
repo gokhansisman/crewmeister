@@ -29,20 +29,19 @@ app.get("/members", async (req: Request, res: Response) => {
 });
 const calendar = ical({ name: "my first iCal" });
 
-
 app.post("/addToCalendar", (req: Request, res: Response) => {
-  const { startTime, endTime, summary, description } = req.body;
+  const { startTime, endTime, name, type } = req.body;
   calendar.createEvent({
     start: startTime,
     end: endTime,
-    summary: "TEST",
-    description: "It works ;)",
-    location: "my room",
-    url: "http://sebbo.net/",
+    name: name,
+    summary: type,
+    description: "Absence",
+    location: "Crewmeister",
   });
   res.send("Added to calendar");
 });
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 app.get("/calendar", async (req: Request, res: Response) => {
   calendar.serve(res);
