@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 const Select = styled.select`
@@ -27,7 +26,7 @@ const Dropdown = ({ setFilter }: DropdownProps) => {
   return (
     <div>
       <Select onChange={(e) => setFilter(e.target.value)}>
-        <option value="" hidden>
+        <option value="all" hidden>
           Vacation Type
         </option>
         <option value="vacation">vacation</option>

@@ -1,20 +1,23 @@
 import React, { useEffect } from "react";
 import AbsenceList from "../components/AbsenceList";
 import { useAppDispatch, useAppSelector } from "../hooks/useTypedSelector";
-import { getAbsences } from "../store/AbsencesSlice";
+import { getAbsences, filteredAbsences } from "../store/AbsencesSlice";
 import { getMembers } from "../store/MembersSlice";
+
 import Loader from "../assets/loading.svg";
 import Dropdown from "../components/Dropdown";
 
 export default function AbsenceManagerPage() {
   const [filter, setFilter] = React.useState("");
   const dispatch = useAppDispatch();
-
   useEffect(() => {
     dispatch(getAbsences());
     dispatch(getMembers());
   }, []);
 
+  useEffect(() => {
+    dispatch(filteredAbsences(filter));
+  }, [filter]);
   const {
     absences,
     loading: absencesLoading,
@@ -25,7 +28,7 @@ export default function AbsenceManagerPage() {
     loading: membersLoading,
     error: membersError,
   } = useAppSelector((state) => state.membersReducer);
-  console.log(filter);
+
   return (
     <div>
       <Dropdown setFilter={setFilter} />

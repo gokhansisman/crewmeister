@@ -42,7 +42,6 @@ app.post("/addToCalendar", (req: Request, res: Response) => {
   });
   res.send("Added to calendar");
 });
-console.log(__dirname)
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get("/calendar", async (req: Request, res: Response) => {

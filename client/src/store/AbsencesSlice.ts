@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { Absence } from "../utils/types";
 
 const initialState = {
   absences: [],
+  absencesContainer: [],
   loading: false,
   error: false,
 };
@@ -18,8 +20,14 @@ const absencesSlice = createSlice({
   name: "absencesList",
   initialState,
   reducers: {
-    fetch_success: (state, action) => {
-      state.absences = action.payload.absences;
+    filteredAbsences: (state, action) => {
+      if (action.payload === "all") {
+        state.absences = state.absencesContainer;
+      } else {
+        state.absences = state.absencesContainer.filter(
+          (absence: Absence) => absence.type === action.payload
+        );
+      }
     },
   },
   extraReducers: (builder) => {
@@ -28,6 +36,7 @@ const absencesSlice = createSlice({
     });
     builder.addCase(getAbsences.fulfilled, (state, action) => {
       state.loading = false;
+      state.absencesContainer = action.payload;
       state.absences = action.payload;
     });
     builder.addCase(getAbsences.rejected, (state, action) => {
@@ -36,6 +45,6 @@ const absencesSlice = createSlice({
   },
 });
 
-export const { fetch_success } = absencesSlice.actions;
+export const { filteredAbsences } = absencesSlice.actions;
 
 export default absencesSlice.reducer;
