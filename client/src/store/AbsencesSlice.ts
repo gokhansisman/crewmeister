@@ -29,6 +29,17 @@ const absencesSlice = createSlice({
         );
       }
     },
+    filteredAbsencesByDate: (state, action) => {
+      if (action.payload === "") {
+        state.absences = state.absencesContainer;
+      } else {
+        state.absences = state.absencesContainer.filter(
+          (absence: Absence) =>
+            new Date(absence.startDate) <= new Date(action.payload) &&
+            new Date(absence.endDate) >= new Date(action.payload)
+        );
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getAbsences.pending, (state, action) => {
@@ -45,6 +56,7 @@ const absencesSlice = createSlice({
   },
 });
 
-export const { filteredAbsences } = absencesSlice.actions;
+export const { filteredAbsences, filteredAbsencesByDate } =
+  absencesSlice.actions;
 
 export default absencesSlice.reducer;
