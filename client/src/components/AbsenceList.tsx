@@ -2,20 +2,40 @@ import { Absence, Member } from "../utils/types";
 import AbsenceCard from "./AbsenceCard";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../hooks/useTypedSelector";
+import {
+  getAbsences,
+  filteredAbsences,
+  filteredAbsencesByDate,
+} from "../store/AbsencesSlice";
+import { getMembers } from "../store/MembersSlice";
+import Loader from "../assets/loading.svg";
 
-export type AbsenceListProps = {
-  absences: Absence[];
-  members: Member[];
-};
 /**
-  * AbsenceList component that renders a list of AbsenceCards
-  * @param {AbsenceListProps} props
-  * @returns {JSX.Element}
+ * AbsenceList component that renders a list of AbsenceCards
+ * @returns {JSX.Element}
  */
-export default function AbsenceList({ absences, members }: AbsenceListProps) {
+export default function AbsenceList() {
   const [page, setPage] = useState(1);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getAbsences());
+    dispatch(getMembers());
+  }, []);
+
+  const {
+    absences,
+    loading: absencesLoading,
+    error: absencesError,
+  } = useAppSelector((state) => state.absenceReducer);
+  const {
+    members,
+    loading: membersLoading,
+    error: membersError,
+  } = useAppSelector((state) => state.membersReducer);
   const PAGE_ROW_COUNT = 10;
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -35,28 +55,39 @@ export default function AbsenceList({ absences, members }: AbsenceListProps) {
     font-weight: 600;
     color: #457b9d;
   `;
+  const Loading = styled.img`
+    display: flex;
+    margin: auto;
+    margin-top: 20px;
+  `;
   return (
     <div>
       <Sum>{absences.length} absences</Sum>
       {absences.length === 0 && <NoAbsence>No absences found</NoAbsence>}
-      <div>
-        {absences
-          .slice(
-            (page - 1) * PAGE_ROW_COUNT,
-            PAGE_ROW_COUNT * (page - 1) + PAGE_ROW_COUNT
-          )
-          .map((absence) => (
-            <AbsenceCard
-              key={absence.id}
-              absence={absence}
-              member={
-                members.find(
-                  (member) => member.userId === absence.userId
-                ) as Member
-              }
-            />
-          ))}
-      </div>
+      {(absencesError || membersError) && <h3>Error!</h3>}
+
+      {absencesLoading || membersLoading ? (
+        <Loading src={Loader} alt="loading" />
+      ) : (
+        <div>
+          {absences
+            .slice(
+              (page - 1) * PAGE_ROW_COUNT,
+              PAGE_ROW_COUNT * (page - 1) + PAGE_ROW_COUNT
+            )
+            .map((absence: Absence) => (
+              <AbsenceCard
+                key={absence.id}
+                absence={absence}
+                member={
+                  members.find(
+                    (member: Member) => member.userId === absence.userId
+                  ) as unknown as Member
+                }
+              />
+            ))}
+        </div>
+      )}
       <Stack spacing={2} display="flex" justifyContent="center">
         <Pagination
           count={Math.ceil(absences.length / 10)}

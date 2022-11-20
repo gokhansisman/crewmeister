@@ -54,6 +54,7 @@ export const Columns = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 10px 0;
+  flex:1;
 `;
 export const Note = styled.div`
   display: flex;
