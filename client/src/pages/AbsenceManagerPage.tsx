@@ -4,8 +4,10 @@ import { useAppDispatch, useAppSelector } from "../hooks/useTypedSelector";
 import { getAbsences } from "../store/AbsencesSlice";
 import { getMembers } from "../store/MembersSlice";
 import Loader from "../assets/loading.svg";
+import Dropdown from "../components/Dropdown";
 
 export default function AbsenceManagerPage() {
+  const [filter, setFilter] = React.useState("");
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -23,10 +25,12 @@ export default function AbsenceManagerPage() {
     loading: membersLoading,
     error: membersError,
   } = useAppSelector((state) => state.membersReducer);
-
+  console.log(filter);
   return (
     <div>
+      <Dropdown setFilter={setFilter} />
       <h4>Absence Manager Page</h4>
+
       {(absencesError || membersError) && <h3>Error!</h3>}
 
       {absencesLoading || membersLoading ? (
@@ -34,7 +38,6 @@ export default function AbsenceManagerPage() {
       ) : (
         <AbsenceList absences={absences} members={members} />
       )}
-      
     </div>
   );
 }

@@ -51,9 +51,36 @@ export const Badge = styled.span<{ backgroundColor: string }>`
   padding: 4px;
 `;
 
+const addToCalendar = async () => {
+  const settings: RequestInit = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      startTime: "2022-11-19",
+      endTime: "2022-11-19",
+      name: "gokhan",
+    }),
+  };
+
+  try {
+    const fetchResponse = await fetch(
+      `http://localhost:3000/addToCalendar`,
+      settings
+    );
+    const data = await fetchResponse.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 function AbsenceCard({ absence, member }: AbsenceCardProps) {
   return (
     <Container>
+      <Row onClick={addToCalendar}>Add to calendar</Row>
       <Row>
         <Image src={member && member.image} alt={member && member.name} />
       </Row>
