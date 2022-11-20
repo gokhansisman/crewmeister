@@ -9,7 +9,7 @@ const initialState = {
 };
 export const getAbsences = createAsyncThunk("getAbsences", async () => {
   try {
-    const response = await fetch("/absences");
+    const response = await fetch("https://crewmeister.herokuapp.com/absences");
     return response.json();
   } catch (error) {
     console.error(error);

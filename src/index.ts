@@ -30,12 +30,13 @@ app.get("/members", async (req: Request, res: Response) => {
 const calendar = ical({ name: "my first iCal" });
 
 app.post("/addToCalendar", (req: Request, res: Response) => {
-  const { startTime, endTime, name, type } = req.body;
+  const { startTime, endTime, name, summary } = req.body;
+  console.log(name, summary, startTime, endTime);
   calendar.createEvent({
     start: startTime,
     end: endTime,
     name: name,
-    summary: type,
+    summary: summary,
     description: "Absence",
     location: "Crewmeister",
   });
@@ -48,5 +49,5 @@ app.get("/calendar", async (req: Request, res: Response) => {
 });
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log(`⚡️[server]: Server is running at `);
+  console.log(`⚡️[server]: Server is running at ${process.env.PORT || 3000}`);
 });

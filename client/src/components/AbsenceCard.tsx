@@ -95,9 +95,17 @@ const addToCalendar = async (absence: Absence, member: Member) => {
   };
 
   try {
-    const fetchResponse = await fetch(`/addToCalendar`, settings);
-    const data = await fetchResponse.json();
-    return data;
+    const fetchResponse = await fetch(
+      `https://crewmeister.herokuapp.com/addToCalendar`,
+      settings
+    );
+    if (await fetchResponse.ok) {
+      const downloadICS = document.createElement("a");
+      downloadICS.href = "https://crewmeister.herokuapp.com/calendar";
+      downloadICS.click();
+    }
+
+    return fetchResponse;
   } catch (e) {
     console.log(e);
   }
@@ -165,7 +173,7 @@ function AbsenceCard({ absence, member }: AbsenceCardProps) {
         </Columns>
       )}
 
-      <AddToCalendar onClick={() => addToCalendar(absence,member)}>
+      <AddToCalendar onClick={() => addToCalendar(absence, member)}>
         <FcCalendar size={24} />
       </AddToCalendar>
     </Container>

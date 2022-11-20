@@ -7,7 +7,7 @@ const initialState = {
 };
 export const getMembers = createAsyncThunk("getMembers", async () => {
   try {
-    const response = await fetch("/members");
+    const response = await fetch("https://crewmeister.herokuapp.com/members");
     return response.json();
   } catch (error) {
     console.error(error);
