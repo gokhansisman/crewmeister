@@ -48,6 +48,6 @@ app.get("/calendar", async (req: Request, res: Response) => {
   calendar.serve(res);
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log(`⚡️[server]: Server is running at `);
 });
