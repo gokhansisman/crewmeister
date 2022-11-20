@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Select = styled.select`
-  width: 100%;
+  width: 240px;
   height: 35px;
   background: white;
   color: gray;
@@ -24,7 +24,6 @@ export type DropdownProps = {
 };
 const Dropdown = ({ setFilter }: DropdownProps) => {
   return (
-    <div>
       <Select onChange={(e) => setFilter(e.target.value)}>
         <option value="all" hidden>
           Vacation Type
@@ -32,7 +31,6 @@ const Dropdown = ({ setFilter }: DropdownProps) => {
         <option value="vacation">vacation</option>
         <option value="sickness">sickness</option>
       </Select>
-    </div>
   );
 };
 export default Dropdown;
