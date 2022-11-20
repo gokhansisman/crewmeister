@@ -95,7 +95,7 @@ const addToCalendar = async () => {
 
   try {
     const fetchResponse = await fetch(
-      `http://localhost:3000/addToCalendar`,
+      `/addToCalendar`,
       settings
     );
     const data = await fetchResponse.json();

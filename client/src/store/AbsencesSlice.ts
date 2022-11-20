@@ -9,7 +9,7 @@ const initialState = {
 };
 export const getAbsences = createAsyncThunk("getAbsences", async () => {
   try {
-    const response = await fetch("http://localhost:3000/absences");
+    const response = await fetch("/absences");
     return response.json();
   } catch (error) {
     console.error(error);

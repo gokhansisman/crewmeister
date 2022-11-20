@@ -7,7 +7,7 @@ const initialState = {
 };
 export const getMembers = createAsyncThunk("getMembers", async () => {
   try {
-    const response = await fetch("http://localhost:3000/members");
+    const response = await fetch("/members");
     return response.json();
   } catch (error) {
     console.error(error);
