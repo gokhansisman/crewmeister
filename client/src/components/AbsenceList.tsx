@@ -9,6 +9,11 @@ export type AbsenceListProps = {
   absences: Absence[];
   members: Member[];
 };
+/**
+  * AbsenceList component that renders a list of AbsenceCards
+  * @param {AbsenceListProps} props
+  * @returns {JSX.Element}
+ */
 export default function AbsenceList({ absences, members }: AbsenceListProps) {
   const [page, setPage] = useState(1);
   const PAGE_ROW_COUNT = 10;

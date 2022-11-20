@@ -104,7 +104,11 @@ const addToCalendar = async () => {
     console.log(e);
   }
 };
-
+/**
+  * AbsenceCard component renders the absence information of a member
+  * @param {AbsenceCardProps} props
+  * @returns {JSX.Element}
+ */
 function AbsenceCard({ absence, member }: AbsenceCardProps) {
   return (
     <Container>

@@ -22,6 +22,11 @@ const Select = styled.select`
 export type DropdownProps = {
   setFilter: (filter: string) => void;
 };
+/**
+ * Dropdown component that renders a dropdown menu
+ * @param {DropdownProps} props
+ * @returns {JSX.Element}
+ */
 const Dropdown = ({ setFilter }: DropdownProps) => {
   return (
       <Select onChange={(e) => setFilter(e.target.value)}>
