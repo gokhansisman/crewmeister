@@ -29,3 +29,10 @@ it("expect to render AbsenceCard component", () => {
     shallow(<AbsenceCard absence={mockAbsence} member={mockMember} />).length
   ).toEqual(1); 
 });
+
+
+it("expect to take snapshot of AbsenceCard component", () => {
+  expect(
+    shallow(<AbsenceCard absence={mockAbsence} member={mockMember} />)
+  ).toMatchSnapshot(); 
+});
