@@ -71,6 +71,9 @@ function AbsenceCard({ absence, member }: AbsenceCardProps) {
               <MdCancel size={40} color="#f44336" />
             </CardHeaderRow>
           </CardHeader>
+          <VacationBadge shadowColor="#eb070766">
+          {absence.type === "vacation" ? <>&#x2708;&#xFE0F;</> : <>&#x1F927;</>}
+        </VacationBadge>
         </Row>
       )}
       {absence.confirmedAt && (
@@ -80,7 +83,11 @@ function AbsenceCard({ absence, member }: AbsenceCardProps) {
               <AiFillCheckCircle size={40} color="#4caf50" />
             </CardHeaderRow>
           </CardHeader>
+          <VacationBadge shadowColor="#00b57a9e">
+          {absence.type === "vacation" ? <>&#x2708;&#xFE0F;</> : <>&#x1F927;</>}
+        </VacationBadge>
         </Row>
+        
       )}
       {!absence.confirmedAt && !absence.rejectedAt && absence.createdAt && (
         <Row>
@@ -89,13 +96,11 @@ function AbsenceCard({ absence, member }: AbsenceCardProps) {
               <MdPending size={40} color="blue" />
             </CardHeaderRow>
           </CardHeader>
-        </Row>
-      )}
-      <Columns>
-        <VacationBadge>
+          <VacationBadge shadowColor="#BCD1FF">
           {absence.type === "vacation" ? <>&#x2708;&#xFE0F;</> : <>&#x1F927;</>}
         </VacationBadge>
-      </Columns>
+        </Row>
+      )}
       <DateContainer>
         <DateRow color="red">
           <Note>{absence.startDate + " / " + absence.endDate}</Note>

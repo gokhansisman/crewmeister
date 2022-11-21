@@ -6,17 +6,16 @@ export const Container = styled.div`
   border-radius: 16px;
   box-shadow: #00000033 8px 8px 13px 0px;
   max-width: 1080px;
-  overflow: hidden;
   width: 320px;
-  height: 260px;
+  height: 280px;
   margin: 10px auto;
   flex-direction: column;
   background-color: rgb(255 255 255);
   color: rgb(29, 53, 87);
   column-gap: 8px;
+  transition: all 500ms ease;
   &:hover {
     transform: skew(0deg, 1deg) scale(1.05);
-    transition: all 500ms ease;
   }
 `;
 export const Row = styled.div`
@@ -33,7 +32,7 @@ export const ProfileContainer = styled.div`
   font-weight: 600;
   width: 94%;
   position: absolute;
-  bottom: -13px;
+  bottom: 0px;
 `;
 export const ProfileCard = styled.div`
   display: flex;
@@ -48,7 +47,7 @@ export const DateContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-right: 16px;
-  padding-top: 4px;
+  padding-top: 12px;
 `;
 export const CardHeaderRow = styled.div`
   display: flex;
@@ -85,11 +84,20 @@ export const Columns = styled.div`
   top: 0;
   right: 0;
 `;
-export const VacationBadge = styled.div`
-  font-size: 24px;
-  margin-right: 6px;
-  margin-top: -6px;
-  color: white;
+export const VacationBadge = styled.div<{shadowColor: string}>`
+position: absolute;
+    top: -10px;
+    right: 10px;
+    background: #efeff2;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    padding: 10px;
+    box-shadow: 0px 0px 11px 2px ${(props) => props.shadowColor};
+    font-size: 20px;
 `;
 export const Note = styled.div`
   display: flex;
@@ -107,7 +115,7 @@ export const Profile = styled.img`
 export const CardHeader = styled.div<{ backgroundColor: string }>`
   width: 100%;
   height: 80px;
-  background-size: cover;
+  border-radius: 16px 16px 0 0;
   background-color: ${(props) => props.backgroundColor};
 `;
 export const Period = styled.div`
@@ -132,5 +140,4 @@ export const NoteContainer = styled.div`
 `;
 export const NoteOwner = styled.div`
   font-weight: 600;
-  padding-bottom: 4px;
 `;
