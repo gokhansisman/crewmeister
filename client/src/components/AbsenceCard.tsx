@@ -1,7 +1,6 @@
 import { Absence, Member } from "../utils/types";
 import Moment from "react-moment";
-import { FaPlane } from "react-icons/fa";
-import { MdSick, MdPending, MdCancel } from "react-icons/md";
+import {  MdPending, MdCancel } from "react-icons/md";
 import { FcCalendar } from "react-icons/fc";
 import { AiFillCheckCircle } from "react-icons/ai";
 import {
@@ -69,7 +68,7 @@ function AbsenceCard({ absence, member }: AbsenceCardProps) {
         <Row>
           <CardHeader backgroundColor="#eb070766">
             <CardHeaderRow>
-              <MdCancel size={40} color="#ff001f" />
+              <MdCancel size={40} color="#f44336" />
             </CardHeaderRow>
           </CardHeader>
         </Row>
@@ -78,7 +77,7 @@ function AbsenceCard({ absence, member }: AbsenceCardProps) {
         <Row>
           <CardHeader backgroundColor="#00b57a9e">
             <CardHeaderRow>
-              <AiFillCheckCircle size={40} color="#005300" />
+              <AiFillCheckCircle size={40} color="#4caf50" />
             </CardHeaderRow>
           </CardHeader>
         </Row>
@@ -94,7 +93,7 @@ function AbsenceCard({ absence, member }: AbsenceCardProps) {
       )}
       <Columns>
         <VacationBadge>
-          {absence.type === "vacation" ? <FaPlane /> : <MdSick />}
+          {absence.type === "vacation" ? <>&#x2708;&#xFE0F;</> : <>&#x1F927;</>}
         </VacationBadge>
       </Columns>
       <DateContainer>

@@ -43,8 +43,11 @@ export default function AbsenceList() {
 
   const Grid = styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     & {
+      @media (max-width: 1340px) {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
       @media (max-width: 1080px) {
         grid-template-columns: 1fr 1fr;
       }

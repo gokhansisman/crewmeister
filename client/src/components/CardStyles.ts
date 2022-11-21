@@ -7,12 +7,17 @@ export const Container = styled.div`
   box-shadow: #00000033 8px 8px 13px 0px;
   max-width: 1080px;
   overflow: hidden;
-  width: 340px;
+  width: 320px;
+  height: 260px;
   margin: 10px auto;
   flex-direction: column;
   background-color: rgb(255 255 255);
   color: rgb(29, 53, 87);
   column-gap: 8px;
+  &:hover {
+    transform: skew(0deg, 1deg) scale(1.05);
+    transition: all 500ms ease;
+  }
 `;
 export const Row = styled.div`
   display: flex;
@@ -26,6 +31,9 @@ export const ProfileContainer = styled.div`
   color: #457b9d;
   font-size: 14px;
   font-weight: 600;
+  width: 94%;
+  position: absolute;
+  bottom: -13px;
 `;
 export const ProfileCard = styled.div`
   display: flex;
@@ -82,7 +90,6 @@ export const VacationBadge = styled.div`
   margin-right: 6px;
   margin-top: -6px;
   color: white;
-  transform: rotateZ(45deg);
 `;
 export const Note = styled.div`
   display: flex;
@@ -95,6 +102,7 @@ export const Profile = styled.img`
   height: 32px;
   background-size: cover;
   border-radius: 50%;
+  object-fit: cover;
 `;
 export const CardHeader = styled.div<{ backgroundColor: string }>`
   width: 100%;
