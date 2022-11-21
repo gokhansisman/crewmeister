@@ -31,7 +31,6 @@ const calendar = ical({ name: "my first iCal" });
 
 app.post("/addToCalendar", (req: Request, res: Response) => {
   const { startTime, endTime, name, summary } = req.body;
-  console.log(name, summary, startTime, endTime);
   calendar.createEvent({
     start: startTime,
     end: endTime,
