@@ -41,6 +41,18 @@ export default function AbsenceList() {
     setPage(value);
   };
 
+  const Grid = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    & {
+      @media (max-width: 1080px) {
+        grid-template-columns: 1fr 1fr;
+      }
+      @media (max-width: 720px) {
+        grid-template-columns: 1fr;
+      }
+    }
+  `;
   const Sum = styled.div`
     display: flex;
     justify-content: center;
@@ -69,7 +81,7 @@ export default function AbsenceList() {
       {absencesLoading || membersLoading ? (
         <Loading src={Loader} alt="loading" />
       ) : (
-        <div>
+        <Grid>
           {absences
             .slice(
               (page - 1) * PAGE_ROW_COUNT,
@@ -86,7 +98,7 @@ export default function AbsenceList() {
                 }
               />
             ))}
-        </div>
+        </Grid>
       )}
       <Stack spacing={2} display="flex" justifyContent="center">
         <Pagination
