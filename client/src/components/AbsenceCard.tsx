@@ -43,12 +43,12 @@ const addToCalendar = async (absence: Absence, member: Member) => {
   };
   try {
     const fetchResponse = await fetch(
-      `https://crewmeister.herokuapp.com/addToCalendar`,
+      `/addToCalendar`,
       settings
     );
     if (await fetchResponse.ok) {
       const downloadICS = document.createElement("a");
-      downloadICS.href = "https://crewmeister.herokuapp.com/calendar";
+      downloadICS.href = "/calendar";
       downloadICS.click();
     }
     return fetchResponse;
